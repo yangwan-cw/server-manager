@@ -1,0 +1,7 @@
+import ServerList from './components/ServerList'
+
+function App() {
+  return <ServerList />
+}
+
+export default App
