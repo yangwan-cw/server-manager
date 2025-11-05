@@ -7,9 +7,21 @@
 pnpm install
 ```
 
-**注意**: 项目使用 Tailwind CSS v4，需要 `@tailwindcss/postcss` 插件。如果遇到 PostCSS 错误，请确保依赖版本一致：
+**注意**: 项目使用 Tailwind CSS v4，配置方式与 v3 不同：
+- 使用 `@import "tailwindcss"` 而不是 `@tailwind` 指令
+- 不需要 `tailwind.config.js` 文件
+- 需要 `@tailwindcss/postcss` 插件
+
+如果遇到样式问题：
 ```bash
+# 确保依赖版本一致
 pnpm update tailwindcss@latest @tailwindcss/postcss@latest
+
+# 清除缓存
+rm -rf node_modules/.vite
+
+# 重启开发服务器
+pnpm dev
 ```
 
 ### 启动开发服务器

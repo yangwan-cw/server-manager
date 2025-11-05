@@ -5,5 +5,6 @@ export interface Server {
   version: string;
   serverAddress: string;
   responsible: string;
+  category: 'development' | 'testing' | 'production' | 'staging';
   status?: 'running' | 'stopped' | 'error' | 'unknown';
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { VersionInfo } from '../types/version';
 
 interface VersionModalProps {
@@ -7,12 +7,12 @@ interface VersionModalProps {
 }
 
 const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
-  const [versionInfo, setVersionInfo] = useState<VersionInfo>({
+  const versionInfo: VersionInfo = {
     gitHash: import.meta.env.VITE_GIT_HASH || 'N/A',
     commitDate: import.meta.env.VITE_COMMIT_DATE || 'N/A',
     commitAuthor: import.meta.env.VITE_COMMIT_AUTHOR || 'N/A',
     version: import.meta.env.VITE_VERSION || 'N/A',
-  });
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -35,66 +35,55 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
       onClick={handleBackdropClick}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >
-      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        {/* Background overlay */}
-        <div
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-          aria-hidden="true"
-        ></div>
-
-        {/* Center modal */}
-        <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >
-          &#8203;
-        </span>
-
-        {/* Modal panel */}
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <h3
-                className="text-lg leading-6 font-semibold text-white flex items-center"
-                id="modal-title"
+      {/* Modal panel */}
+      <div 
+        className="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-indigo-400 to-purple-400 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <h3
+              className="text-lg leading-6 font-semibold text-white flex items-center"
+              id="modal-title"
+            >
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  className="w-6 h-6 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                  />
-                </svg>
-                Version Information
-              </h3>
-              <button
-                onClick={onClose}
-                className="text-white hover:text-gray-200 transition-colors duration-200"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+              版本信息
+            </h3>
+            <button
+              onClick={onClose}
+              className="text-white hover:text-gray-200 transition-colors duration-200"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
           </div>
+        </div>
 
           {/* Body */}
           <div className="bg-white px-6 py-5">
@@ -102,7 +91,7 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
               {/* Git Hash */}
               <div className="border-b border-gray-200 pb-3">
                 <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Git Commit Hash
+                  Git 提交哈希
                 </label>
                 <div className="flex items-center">
                   <code className="text-sm font-mono bg-gray-100 px-3 py-2 rounded-md text-gray-900 flex-1">
@@ -135,7 +124,7 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
               {/* Commit Date */}
               <div className="border-b border-gray-200 pb-3">
                 <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Commit Date
+                  提交时间
                 </label>
                 <div className="flex items-center text-gray-900">
                   <svg
@@ -158,7 +147,7 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
               {/* Commit Author */}
               <div className="border-b border-gray-200 pb-3">
                 <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Commit Author
+                  提交人
                 </label>
                 <div className="flex items-center text-gray-900">
                   <svg
@@ -180,7 +169,7 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
 
               {/* Version */}
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Version</label>
+                <label className="block text-sm font-medium text-gray-500 mb-1">版本号</label>
                 <div className="flex items-center text-gray-900">
                   <svg
                     className="w-5 h-5 mr-2 text-gray-400"
@@ -203,16 +192,15 @@ const VersionModal = ({ isOpen, onClose }: VersionModalProps) => {
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="bg-gray-50 px-6 py-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
-            >
-              Close
-            </button>
-          </div>
+        {/* Footer */}
+        <div className="bg-gray-50 px-6 py-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+          >
+            关闭
+          </button>
         </div>
       </div>
     </div>
