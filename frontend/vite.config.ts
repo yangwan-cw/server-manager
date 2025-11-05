@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5173,
       host: true,
+      allowedHosts: ['.gitpod.dev', '.gitpod.io'],
     },
     envPrefix: 'VITE_',
   }

@@ -19,6 +19,9 @@ A modern web application for managing and monitoring server infrastructure, buil
 - 🚀 快速跳转到服务器 (Quick jump to server)
 - 📱 移动端适配 (Mobile responsive)
 - 🎯 卡片式布局 (Card-based layout)
+- 🧭 导航栏 (Navigation bar with logo and name)
+- 📋 版本信息展示 (Version info modal with git information)
+- 🏷️ 自动版本管理 (Automatic version management from git tags)
 
 ## 项目结构 (Project Structure)
 
@@ -94,6 +97,8 @@ pnpm dev
 
 应用将在 `http://localhost:5173` 启动
 
+**注意**: 启动时会自动生成版本信息文件 `.env.version`，包含 git hash、提交时间、提交人和版本号（从 git tag 读取）
+
 ### 6. 构建生产版本 (Build for Production)
 
 ```bash
@@ -101,6 +106,8 @@ pnpm build
 ```
 
 构建产物将输出到 `dist/` 目录
+
+**注意**: 构建时也会自动生成版本信息，确保生产环境中显示正确的版本
 
 ### 7. 预览生产构建 (Preview Production Build)
 
@@ -198,6 +205,29 @@ export default {
   },
 }
 ```
+
+## 版本管理 (Version Management)
+
+### Git Tag 版本号 (Git Tag Versioning)
+
+项目使用 git tag 管理版本号。创建新版本：
+
+```bash
+# 创建新的版本标签
+git tag v1.0.0
+
+# 推送标签到远程仓库
+git push origin v1.0.0
+```
+
+版本信息会在构建时自动提取并注入到应用中，可以通过导航栏的 "Version Info" 按钮查看。
+
+### 版本信息包含 (Version Info Includes)
+
+- **Git Hash**: 前 8 位提交哈希值
+- **Commit Date**: 提交时间
+- **Commit Author**: 提交人
+- **Version**: 最新的 git tag（如果没有 tag 则显示 "dev"）
 
 ## 浏览器支持 (Browser Support)
 
