@@ -7,6 +7,11 @@
 pnpm install
 ```
 
+**注意**: 项目使用 Tailwind CSS v4，需要 `@tailwindcss/postcss` 插件。如果遇到 PostCSS 错误，请确保依赖版本一致：
+```bash
+pnpm update tailwindcss@latest @tailwindcss/postcss@latest
+```
+
 ### 启动开发服务器
 ```bash
 pnpm dev
@@ -112,3 +117,14 @@ A: 检查：
 1. `.env` 文件中的 API 地址是否正确
 2. 后端服务是否启动
 3. 浏览器控制台是否有错误信息
+
+### Q: PostCSS 报错 "tailwindcss directly as a PostCSS plugin"？
+A: 运行以下命令更新依赖：
+```bash
+pnpm update tailwindcss@latest @tailwindcss/postcss@latest
+rm -rf node_modules/.vite
+pnpm dev
+```
+
+### Q: 为什么使用 pnpm 而不是 npm？
+A: pnpm 更快、更节省磁盘空间，且项目已配置使用 pnpm。所有脚本都通过 pnpm 运行。

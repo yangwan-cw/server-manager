@@ -1,5 +1,5 @@
 import apiClient from './axios';
-import { Server } from '../types/server';
+import type { Server } from '../types/server';
 
 export const serverApi = {
   getServers: async (): Promise<Server[]> => {

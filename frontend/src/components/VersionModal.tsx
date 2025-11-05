@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { VersionInfo } from '../types/version';
+import type { VersionInfo } from '../types/version';
 
 interface VersionModalProps {
   isOpen: boolean;

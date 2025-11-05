@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Server } from '../types/server';
+import type { Server } from '../types/server';
 import { serverApi } from '../api/serverApi';
 
 const ServerList = () => {
